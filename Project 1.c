@@ -7,10 +7,64 @@ void countSort(int A[], int n);
 void printArray(int A[], int n);
 void generateInFile(int n);
 
+const int AMOUNT_OF_GENERATED_NUMBERS = 15;
+
 int main()
 {
 
     printf("Hello World");
+    generateInFile(AMOUNT_OF_GENERATED_NUMBERS);
+
+        //Block of code for reading in the file and reading into a dynamic array
+        //A1 creation and fill from file
+        FILE *input;
+        int NumberOfIntegers;
+        input = fopen("A1.txt", "r");
+
+        if (input == NULL)
+        {
+            printf("The input file is not able to be read in correctly");
+            return 1;
+        }
+
+        fscanf(input, "%d", &NumberOfIntegers);
+        printf("%d\n", NumberOfIntegers);
+
+        int *A1; int *A2;
+        A1 = (int*)malloc(NumberOfIntegers * sizeof(int));
+        
+        if(A1 == NULL)
+        {
+            printf("The memory of array A1 was not properly set up");
+            return 1;
+        }
+
+        int temp;
+        for(int i=0; i < NumberOfIntegers; ++i)
+        {
+            fscanf(input, "%d", &temp);
+            A1[i] = temp;
+        }
+        //End of A1
+
+        //A2 creation and copy from A1
+        A2 = (int*)malloc(NumberOfIntegers * sizeof(int));
+        
+        if(A2 == NULL)
+        {
+            printf("The memory of array A1 was not properly set up");
+            return 1;
+        }
+
+        for(int i=0; i < NumberOfIntegers; ++i)
+        {
+            A2[i] = A1[i];
+        }
+        //End of A2
+        //End of block of code
+
+
+
     /*
     1. Call generateInFile function to generate integer random numbers and store them in a text file
     2. Copy the numbers from the file to an array A1 and another array A2 (A1=A2). Use dynamic allocation to declare A1 and A2
@@ -29,7 +83,9 @@ int main()
     return 0;
 }
 
-/*
+
+
+
 
 //selection sort function
 void selectionSort(int A[], int n) // n is the size of A
@@ -57,12 +113,22 @@ void printArray(int A[], int n)
     printf("\n");
 }
 
+
+
  //Function to generate n random integer numbers in the range 0 to RAND_MAX = 32767
+
  void generateInFile(int n)
  {
     int x;
     FILE *out;
     out = fopen("A1.txt", "r+");
+
+    if(out == NULL)
+    {
+        printf("File was not found");
+        return;
+    }
+
     fprintf(out, "%d\n", n);
     srand(time(NULL));
     for (int i = 0; i < n; i++)
@@ -73,5 +139,3 @@ void printArray(int A[], int n)
     fclose(out);
  }
 
-
- */
