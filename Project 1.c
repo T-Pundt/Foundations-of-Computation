@@ -17,53 +17,53 @@ int main()
 
         //Block of code for reading in the file and reading into a dynamic array
         //A1 creation and fill from file
-        FILE *input;
-        int NumberOfIntegers;
-        input = fopen("A1.txt", "r");
+            FILE *input;
+            int NumberOfIntegers;
+            input = fopen("A1.txt", "r");
 
-        if (input == NULL)
-        {
-            printf("The input file is not able to be read in correctly");
-            return 1;
-        }
+            if (input == NULL)
+            {
+                printf("The input file is not able to be read in correctly");
+                return 1;
+            }
 
-        fscanf(input, "%d", &NumberOfIntegers);
-        printf("%d\n", NumberOfIntegers);
+            fscanf(input, "%d", &NumberOfIntegers);
+            printf("%d\n", NumberOfIntegers);
 
-        int *A1; int *A2;
-        A1 = (int*)malloc(NumberOfIntegers * sizeof(int));
-        
-        if(A1 == NULL)
-        {
-            printf("The memory of array A1 was not properly set up");
-            return 1;
-        }
+            int *A1; int *A2;
+            A1 = (int*)malloc(NumberOfIntegers * sizeof(int));
+            
+            if(A1 == NULL)
+            {
+                printf("The memory of array A1 was not properly set up");
+                return 1;
+            }
 
-        int temp;
-        for(int i=0; i < NumberOfIntegers; ++i)
-        {
-            fscanf(input, "%d", &temp);
-            A1[i] = temp;
-        }
+            int temp;
+            for(int i=0; i < NumberOfIntegers; ++i)
+            {
+                fscanf(input, "%d", &temp);
+                A1[i] = temp;
+            }
         //End of A1
 
         //A2 creation and copy from A1
-        A2 = (int*)malloc(NumberOfIntegers * sizeof(int));
-        
-        if(A2 == NULL)
-        {
-            printf("The memory of array A1 was not properly set up");
-            return 1;
-        }
+            A2 = (int*)malloc(NumberOfIntegers * sizeof(int));
+            
+            if(A2 == NULL)
+            {
+                printf("The memory of array A1 was not properly set up");
+                return 1;
+            }
 
-        for(int i=0; i < NumberOfIntegers; ++i)
-        {
-            A2[i] = A1[i];
-        }
+            for(int i=0; i < NumberOfIntegers; ++i)
+            {
+                A2[i] = A1[i];
+            }
         //End of A2
         //End of block of code
 
-
+    selectionSort(A1, NumberOfIntegers);
 
     /*
     1. Call generateInFile function to generate integer random numbers and store them in a text file
@@ -90,7 +90,44 @@ int main()
 //selection sort function
 void selectionSort(int A[], int n) // n is the size of A
 {
-    //Implement selection sort algorithm here
+    int min = A[0]; 
+    int temp_index;
+
+    //Find the min, record it, record the index its at
+    for(int i=0; i<n; ++i)
+    {
+        if(A[i] < min)
+        {
+            min = A[i];
+            temp_index = i;
+        }
+    }
+
+    //Swap the min and first index in array
+    A[temp_index] = A[0];
+    A[0] = min;
+
+    //Prefrom Selection Sort algorithm for the rest of the array
+    for(int i=1; i<n-1; ++i)
+    {
+        min = A[i];
+        for(int j=i+1; j<n; ++j)
+        {
+            if(A[j] < min)
+            {
+                min = A[j];
+                temp_index = j;
+            }
+        }
+
+        if(A[i] != min)
+        {
+        A[temp_index] = A[i];
+        A[i] = min;
+        }
+    }
+
+    printArray(A, n);
 }
 
 //counting sort function
@@ -133,7 +170,7 @@ void printArray(int A[], int n)
     srand(time(NULL));
     for (int i = 0; i < n; i++)
     {
-        x = rand();
+        x = rand() % 100 + 1; //remove the logical statemenet when done testing
         fprintf(out, "%d ", x);
     }
     fclose(out);
