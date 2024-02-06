@@ -7,7 +7,7 @@ void countSort(int A[], int n);
 void printArray(int A[], int n);
 void generateInFile(int n);
 
-const long AMOUNT_OF_GENERATED_NUMBERS = 10;
+const long AMOUNT_OF_GENERATED_NUMBERS = 100;
 
 int main()
 {
@@ -82,21 +82,10 @@ int main()
     time_spent2 = (double)(end2 - start2) / CLOCKS_PER_SEC;
     printf("Time taken by countSort algorithm is %f sec.\n", time_spent2);
 
-    /*
-    1. Call generateInFile function to generate integer random numbers and store them in a text file
-    2. Copy the numbers from the file to an array A1 and another array A2 (A1=A2). Use dynamic allocation to declare A1 and A2
-    3. Define two variables start1 and end1 of type clock_t.
-    4. Keep the following code to measure the running time of the selection sort algorithm.
-
-    start1 = clock();
-    selectionSort(A, n);
-    end1 = clock();
-    time_spent1 = (double)(end1 - start1) / CLOCKS_PER_SEC;
-    printf("Time taken by selectionSort algorithm is %f sec.\n",time_spent1);
-
-
-    5. repeat steps 3. and 4. to measure the running time of the counting sort algorithm*/
-
+   
+    free(A1);
+    free(A2);
+    
     return 0;
 }
 
@@ -120,7 +109,7 @@ void selectionSort(int A[], int n) // n is the size of A
         }
     }
 
-    printf("Smallest found");
+    printf("Smallest found\n");
 
     //Swap the min and first index in array
     A[temp_index] = A[0];
@@ -145,7 +134,6 @@ void selectionSort(int A[], int n) // n is the size of A
         A[i] = min;
         }
 
-        printf("check %d\n", i);
     }
 }
 
@@ -202,7 +190,8 @@ void countSort(int A[], int n) // n is the size of A
         A[i] = B[i];
     }
 
-    //printArray(A, n);
+    free(B);
+    free(C);
 }
 
 //Function to print the content of an array
@@ -219,6 +208,7 @@ void printArray(int A[], int n)
 
  void generateInFile(int n)
  {
+    printf("Generating file....\n");
     int x;
     FILE *out;
     out = fopen("A1.txt", "r+");
@@ -233,9 +223,10 @@ void printArray(int A[], int n)
     srand(time(NULL));
     for (int i = 0; i < n; i++)
     {
-        x = rand(); //                         % 100 + 1; //remove the logical statemenet when done testing
+        x = rand(); 
         fprintf(out, "%d ", x);
     }
     fclose(out);
+    printf("Generating complete!\n");
  }
 
