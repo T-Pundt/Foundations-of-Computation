@@ -62,14 +62,14 @@ int main()
         //End of block of code
 
     //Define variables, setup clock, and call selectionSort.
-        // clock_t start1, end1;
-        // double time_spent1;
+        clock_t start1, end1;
+        double time_spent1;
 
-        // start1 = clock();
-        // selectionSort(A1, NumberOfIntegers);
-        // end1 = clock();
-        // time_spent1 = (double)(end1 - start1) / CLOCKS_PER_SEC;
-        // printf("Time taken by selectionSort algorithm is %f sec.\n",time_spent1);
+        start1 = clock();
+        selectionSort(A1, NumberOfIntegers);
+        end1 = clock();
+        time_spent1 = (double)(end1 - start1) / CLOCKS_PER_SEC;
+        printf("Time taken by selectionSort algorithm is %f sec.\n",time_spent1);
 
 
     //Define variables, setup clock and call CountSort
