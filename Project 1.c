@@ -109,8 +109,6 @@ void selectionSort(int A[], int n) // n is the size of A
         }
     }
 
-    printf("Smallest found\n");
-
     //Swap the min and first index in array
     A[temp_index] = A[0];
     A[0] = min;
